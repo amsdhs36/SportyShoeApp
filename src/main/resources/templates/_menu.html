@@ -2,7 +2,7 @@
    xmlns:th="http://www.thymeleaf.org"
    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
    <a th:href="@{/}">Home</a>
-   |
+  
    <a th:href="@{/productList}">
    Product List
    </a>
@@ -10,8 +10,7 @@
    <a th:href="@{/shoppingCart}">
    My Cart
    </a>
-   |
-   <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+   |    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
       <a th:href="@{/admin/orderList}">
       Order List
       </a>

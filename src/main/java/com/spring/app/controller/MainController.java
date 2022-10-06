@@ -263,5 +263,10 @@ public class MainController {
       }
       response.getOutputStream().close();
    }
+   @RequestMapping(value = { "/user/login" }, method = RequestMethod.GET)
+   public String login(Model model) {
+
+      return "userlogin";
+   }
 
 }

@@ -20,7 +20,8 @@ public class PaginationResult<E> {
    private List<Integer> navigationPages;
 
    // @page: 1, 2, ..
-   public PaginationResult(Query<E> query, int page, int maxResult, int maxNavigationPage) {
+   @SuppressWarnings("unchecked")
+public PaginationResult(Query<E> query, int page, int maxResult, int maxNavigationPage) {
       final int pageIndex = page - 1 < 0 ? 0 : page - 1;
 
       int fromRecordIndex = pageIndex * maxResult;
@@ -37,15 +38,14 @@ public class PaginationResult<E> {
          hasResult = resultScroll.scroll(fromRecordIndex);
 
          if (hasResult) {
-            do {
-               @SuppressWarnings("unchecked")
-			E record = (E) resultScroll.get(0);
-               results.add(record);
-            } while (resultScroll.next()//
-                  && resultScroll.getRowNumber() >= fromRecordIndex
-                  && resultScroll.getRowNumber() < maxRecordIndex);
+             do {
+                E record = (E) resultScroll.get(0);
+                results.add(record);
+             } while (resultScroll.next()//
+                   && resultScroll.getRowNumber() >= fromRecordIndex
+                   && resultScroll.getRowNumber() < maxRecordIndex);
 
-         }
+          }
 
          // Go to Last record.
          resultScroll.last();
